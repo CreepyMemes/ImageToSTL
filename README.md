@@ -1,11 +1,11 @@
 Setup
-#####
+=====
 
 - Install python 3.11 - https://www.python.org/downloads/
 - Install requirements - `python -m pip install -r requirements.txt`
 
 Usage
-#####
+=====
 
 `python pic3d.py my-image.png`
 
