@@ -50,7 +50,7 @@ def main():
     height    = increment * (rows-1)        # Mesh height
     triangles = (cols-1)  * (rows-1) * 2    # Total amount of triangles in the height map mesh
 
-    # Declares the 2D numpy arrays that will contain all the vertices and triangles of the height map mesh
+    # Declares a 2D numpy array that will contain all the vertices of the height map mesh
     vertices  = np.zeros((rows, cols, 3))
 
     # Defines the coordinates of each vertex
