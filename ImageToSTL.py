@@ -23,11 +23,11 @@ def getHeightMap(pixels, average):
     
 def main():
     # Loads the pixel data of the image and normalizes it to the range [0, 1]
-    img_name  = 'input.png'
+    img_name  = 'dwayne.png'
     img       = Image.open(img_name).convert('L')
     pixels    = img.load() 
-    cols      = img.width  # Total amount of pixels in each row
-    rows      = img.height # Total amount of rows in the image
+    cols      = img.width   # Total amount of pixels in each row
+    rows      = img.height  # Total amount of rows in the image
     pixels    = [ [(pixels[x, y] / 255) for x in range(cols)] for y in range(rows) ]
 
     # Calculates the average of every pixel in the image
@@ -44,11 +44,11 @@ def main():
     out_img.save( f"{img_name.split('.')[0]}-HeightMap.png" )
 
     # Mesh size constraints
-    width     = 100                         # Mesh width
-    scale     = -width * 0.1                 # Height map scale
-    increment = width     / (cols-1)        # Distance between each vertex
-    height    = increment * (rows-1)        # Mesh height
-    triangles = (cols-1)  * (rows-1) * 2    # Total amount of triangles in the height map mesh
+    width     = 100                        # Mesh width
+    scale     = width     * -0.1           # Height map scale
+    increment = width     / (cols-1)       # Distance between each vertex
+    height    = increment * (rows-1)       # Mesh height
+    triangles = (cols-1)  * (rows-1) * 2   # Total amount of triangles in the height map mesh
 
     # Declares a 2D numpy array that will contain all the vertices of the height map mesh
     vertices  = np.zeros((rows, cols, 3))
@@ -56,7 +56,7 @@ def main():
     # Defines the coordinates of each vertex
     for i, row in enumerate(height_map):
         for j, pixel in enumerate(row):
-            vertices[i][j] = ( j*increment - width/2, pixel * scale, height - i*increment )
+            vertices[i][j] = ( j * increment - width/2, pixel * scale, height - i * increment )
     
     # Creates the STL mesh
     surface = mesh.Mesh(np.zeros(triangles, dtype=mesh.Mesh.dtype))
@@ -69,11 +69,9 @@ def main():
             surface.vectors[count][1] = vertices[i][j+1]
             surface.vectors[count][2] = vertices[i+1][j]
             count += 1
-    for i in range(rows-1, 0, -1):
-        for j in range(cols-1, 0, -1):
-            surface.vectors[count][0] = vertices[i][j]
-            surface.vectors[count][1] = vertices[i][j-1]
-            surface.vectors[count][2] = vertices[i-1][j]
+            surface.vectors[count][0] = vertices[i+1][j+1]
+            surface.vectors[count][1] = vertices[i][j+1]
+            surface.vectors[count][2] = vertices[i+1][j]
             count += 1
 
     # Saves the mesh to an file STL file
