@@ -2,19 +2,15 @@ Still a work in progress. Don't use this fork yet
 =====
 
 - Install python 3.11 - https://www.python.org/downloads/
-- Install requirements - `python -m pip install -r requirements.txt`
+- Install requirements - `pip install pillow` `pip install pillow` `pip install numpy` `pip install numpy-stl`
 
 Usage
 =====
 
-`python pic3d.py my-image.png`
+`python ImageToSTL.py`
 
-This will create an image called `my-image-3d.png`.
-This is a heightmap for the 3d print which can be converted to STL by many tools.
-I used OpenSCAD and included the file used to render to STL - `pic3d.scad`
+This script generates an STL file called `imagename.stl`, ready to be 3D printed.
+It also generates a height map PNG image file called `imagename-HeightMap.png`.
 
-When printing on FDM, the heightmap should be oriented vertically so the
-image is facing the -y direction (as if it's a picture hanging on a wall).
-
-The surface will show the original image when illuminated from the left.
-If you want a different direction, rotate the image before running the script, so that the side you want illuminated is facing left.
+When printing on FDM, the heightmap should be oriented vertically (the STL should already be oriented correctly).
+The printed surface will show the original image when illuminated from the left.
