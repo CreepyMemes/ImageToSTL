@@ -37,7 +37,7 @@ def main():
     # Converts the image into a normalized height map
     height_map = getHeightMap(pixels, average)
 
-    # Outputs the height map image
+    # Saves the height map image into PNG file
     out_img = Image.new( 'L', (cols, rows) )
     for y, row in enumerate(height_map):
         for x, pixel in enumerate(row):
@@ -74,7 +74,7 @@ def main():
             surface.vectors[count][2] = vertices[i+1][j]
             count += 1
 
-    # Saves the mesh to an file STL file
+    # Saves the mesh to an STL file
     surface.save(f"{img_name.split('.')[0]}.stl")
     print("STL Generated!")
 
