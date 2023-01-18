@@ -27,8 +27,8 @@ def main():
     img        = Image.open(img_name).convert('L')                                    # Opens the image and converts it to grayscale                                                          
     cols, rows = (200, 200)                                                           # Final image size in mm
     img        = img.resize( (cols, int(cols * img.size[1] / img.size[0])) )          # Resizes the image with while maintaining the aspect ratio
+    cols, rows = img.size                                                             # Actual image size in mm with original aspect ratio   
     pixels     = img.load()                                                           # Loads the image data into pixels
-    cols, rows = img.size                                                             # Total amount of pixels in each row and column   
     pixels     = [ [(pixels[x, y] / 255) for x in range(cols)] for y in range(rows) ] # Converts the image data into a list of lists
 
     # Calculates the average of every pixel in the image
