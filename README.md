@@ -9,7 +9,7 @@ Usage
 `python ImageToSTL.py`
 
 This script generates an STL file called `imagename.stl`, ready to be 3D printed.
-It also generates a height map PNG image file called `imagename-HeightMap.png`.
+It also generates a height map PNG image file called `imagename_heightmap.png`.
 
 When printing on FDM, the heightmap should be oriented vertically (the STL should already be oriented correctly).
 The printed surface will show the original image when illuminated from the left.
