@@ -22,13 +22,14 @@ def getHeightMap(pixels, average):
     return getNormalized( [ getRowHeightMap(row, average) for row in pixels ] )
     
 def main():
-    # Loads the pixel data of the image and normalizes it to the range [0, 1]
-    img_name  = 'dwayne.png'
-    img       = Image.open(img_name).convert('L')
-    pixels    = img.load() 
-    cols      = img.width   # Total amount of pixels in each row
-    rows      = img.height  # Total amount of rows in the image
-    pixels    = [ [(pixels[x, y] / 255) for x in range(cols)] for y in range(rows) ]
+    # Image Loader
+    img_name   = 'dwayne.png'                                                         # Image file name
+    img        = Image.open(img_name).convert('L')                                    # Opens the image and converts it to grayscale                                                          
+    cols, rows = (200, 200)                                                           # Final image size in mm
+    img        = img.resize( (cols, int(cols * img.size[1] / img.size[0])) )          # Resizes the image with while maintaining the aspect ratio
+    pixels     = img.load()                                                           # Loads the image data into pixels
+    cols, rows = img.size                                                             # Total amount of pixels in each row and column   
+    pixels     = [ [(pixels[x, y] / 255) for x in range(cols)] for y in range(rows) ] # Converts the image data into a list of lists
 
     # Calculates the average of every pixel in the image
     average = sum(pixel for row in pixels for pixel in row) / (cols * rows)
@@ -42,13 +43,13 @@ def main():
         for x, pixel in enumerate(row):
             out_img.putpixel( (x, y), int(255 * pixel) )
     out_img.save( f"{img_name.split('.')[0]}-HeightMap.png" )
+    print("Height Map Generated!")
 
     # Mesh size constraints
-    width     = 100                        # Mesh width
-    scale     = width     * -0.1           # Height map scale
-    increment = width     / (cols-1)       # Distance between each vertex
-    height    = increment * (rows-1)       # Mesh height
-    triangles = (cols-1)  * (rows-1) * 2   # Total amount of triangles in the height map mesh
+    scale     = cols     * -0.1           # Height map scale
+    increment = cols     / (cols-1)       # Distance between each vertex
+    triangles = (cols-1) * (rows-1) * 2   # Total amount of triangles in the height map mesh
+    count     = 0                         # Count each triangle
 
     # Declares a 3D numpy array that will contain all the vertices of the height map mesh
     vertices  = np.zeros((rows, cols, 3))
@@ -56,13 +57,12 @@ def main():
     # Defines the coordinates of each vertex
     for i, row in enumerate(height_map):
         for j, pixel in enumerate(row):
-            vertices[i][j] = ( j * increment - width/2, pixel * scale, height - i * increment )
+            vertices[i][j] = ( j * increment - cols/2, pixel * scale, rows - i * increment )
     
     # Creates the STL mesh
     surface = mesh.Mesh(np.zeros(triangles, dtype=mesh.Mesh.dtype))
 
     # Tesselates the mesh by combining all the vertexes through triangles
-    count = 0 # Count each triangle
     for i in range(rows-1):
         for j in range(cols-1):
             surface.vectors[count][0] = vertices[i][j]
@@ -76,6 +76,7 @@ def main():
 
     # Saves the mesh to an file STL file
     surface.save(f"{img_name.split('.')[0]}.stl")
+    print("STL Generated!")
 
 if __name__ == '__main__':
     main()
