@@ -23,9 +23,9 @@ def getHeightMap(pixels, average):
     
 def main():
     # Image Loader
-    img_name   = 'dwayne.png'                                                       # Image file name
+    img_name   = 'input.png'                                                        # Image file name
     img        = Image.open(img_name).convert('L')                                  # Opens the image and converts it to grayscale                                                          
-    cols, rows = (200, 200)                                                         # Final image size in mm
+    cols, rows = (10, 10)                                                           # Final image size in mm
     img        = img.resize( (cols, int(cols * img.size[1] / img.size[0])) )        # Resizes the image with while maintaining the aspect ratio
     cols, rows = img.size                                                           # Actual image size in mm with original aspect ratio   
     pixels     = img.load()                                                         # Loads the image data into pixels
@@ -45,9 +45,10 @@ def main():
     out_img.save( f"{img_name.split('.')[0]}_heightmap.png" )
     print("Height Map File Generated!")
 
-    # Solid mesh thickness and the  amount of triangles in the whole mesh
-    thickness = cols / 30
-    triangles = 2 * ( (cols-1) * (rows-1) + 2 * ( (cols-1) + (rows-1)) )
+    # Mesh variables
+    thickness = cols / 30                                                # Solid mesh thickness
+    triangles = 2 * ( (cols-1) * (rows-1) + 2 * ( (cols-1) + (rows-1)) ) # Amount of triangles in the whole mesh
+    count = 0                                                            # Variable that counts each triangle
     
     # Declares a 3D numpy array that will contain all the vertices of the height map mesh
     vertices_heightmap  = np.zeros( (rows, cols, 3) )
@@ -61,55 +62,45 @@ def main():
     surface = mesh.Mesh( np.zeros(triangles, dtype=mesh.Mesh.dtype) )
     
     # Tesselates the main surface mesh by combining all the height map vertices through triangles
-    count = 0
     for i in range(rows-1):
         for j in range(cols-1):
-            surface.vectors[count][0] = vertices_heightmap[i][j]
-            surface.vectors[count][1] = vertices_heightmap[i][j+1]
-            surface.vectors[count][2] = vertices_heightmap[i+1][j]
-            count += 1
-            surface.vectors[count][0] = vertices_heightmap[i+1][j+1]
-            surface.vectors[count][1] = vertices_heightmap[i][j+1]
-            surface.vectors[count][2] = vertices_heightmap[i+1][j]
-            count += 1
+            surface.vectors[count]   [0] = vertices_heightmap[i]    [j]
+            surface.vectors[count]   [1] = vertices_heightmap[i]    [j+1]
+            surface.vectors[count]   [2] = vertices_heightmap[i+1]  [j]
+            surface.vectors[count+1] [0] = vertices_heightmap[i+1]  [j+1]
+            surface.vectors[count+1] [1] = vertices_heightmap[i]    [j+1]
+            surface.vectors[count+1] [2] = vertices_heightmap[i+1 ] [j]
+            count += 2
 
     # Tesselates the frame mesh by combining all the frame vertices through triangles
-    for i in range(cols-1): # Top row frame
-        surface.vectors[count][0] = ( vertices_heightmap[0][i][0], thickness, vertices_heightmap[0][i][2] )
-        surface.vectors[count][1] =   vertices_heightmap[0][i]
-        surface.vectors[count][2] =   vertices_heightmap[0][i+1]
-        count += 1
-        surface.vectors[count][0] = ( vertices_heightmap[0][i][0], thickness, vertices_heightmap[0][i][2] )
-        surface.vectors[count][1] =   vertices_heightmap[0][i+1]
-        surface.vectors[count][2] = ( vertices_heightmap[0][i+1][0], thickness, vertices_heightmap[0][i+1][2] )
-        count += 1
-    for i in range(cols-1): # Bottom row frame
-        surface.vectors[count][0] = ( vertices_heightmap[rows-1][i][0], thickness, vertices_heightmap[rows-1][i][2] )
-        surface.vectors[count][1] =   vertices_heightmap[rows-1][i]
-        surface.vectors[count][2] =   vertices_heightmap[rows-1][i+1]
-        count += 1
-        surface.vectors[count][0] = ( vertices_heightmap[rows-1][i][0], thickness, vertices_heightmap[rows-1][i][2] )
-        surface.vectors[count][1] =   vertices_heightmap[rows-1][i+1]
-        surface.vectors[count][2] = ( vertices_heightmap[rows-1][i+1][0], thickness, vertices_heightmap[rows-1][i+1][2] )
-        count += 1
-    for i in range(rows-1): # Left column frame 
-        surface.vectors[count][0] = ( vertices_heightmap[i][0][0], thickness, vertices_heightmap[i][0][2] )
-        surface.vectors[count][1] =   vertices_heightmap[i][0]
-        surface.vectors[count][2] =   vertices_heightmap[i+1][0]
-        count += 1
-        surface.vectors[count][0] = ( vertices_heightmap[i][0][0], thickness, vertices_heightmap[i][0][2] )
-        surface.vectors[count][1] =   vertices_heightmap[i+1][0]
-        surface.vectors[count][2] = ( vertices_heightmap[i+1][0][0], thickness, vertices_heightmap[i+1][0][2] )
-        count += 1
-    for i in range(rows-1):  # Right column frame
-        surface.vectors[count][0] = ( vertices_heightmap[i][cols-1][0], thickness, vertices_heightmap[i][cols-1][2] )
-        surface.vectors[count][1] =   vertices_heightmap[i][cols-1]
-        surface.vectors[count][2] =   vertices_heightmap[i+1][cols-1]
-        count += 1
-        surface.vectors[count][0] = ( vertices_heightmap[i][cols-1][0], thickness, vertices_heightmap[i][cols-1][2] )
-        surface.vectors[count][1] =   vertices_heightmap[i+1][cols-1]
-        surface.vectors[count][2] = ( vertices_heightmap[i+1][cols-1][0], thickness, vertices_heightmap[i+1][cols-1][2] )
-        count += 1
+    for i in range(cols-1): # Top/Bottom row frame
+        surface.vectors[count]   [0] =   vertices_heightmap[0]      [i]
+        surface.vectors[count]   [1] = ( vertices_heightmap[0]      [i]      [0], thickness, vertices_heightmap[0]      [i]      [2] )
+        surface.vectors[count]   [2] =   vertices_heightmap[0]      [i+1]
+        surface.vectors[count+1] [0] = ( vertices_heightmap[0]      [i]      [0], thickness, vertices_heightmap[0]      [i]      [2] )
+        surface.vectors[count+1] [1] =   vertices_heightmap[0]      [i+1]
+        surface.vectors[count+1] [2] = ( vertices_heightmap[0]      [i+1]    [0], thickness, vertices_heightmap[0]      [i+1]    [2] )
+        surface.vectors[count+2] [0] =   vertices_heightmap[rows-1] [i]
+        surface.vectors[count+2] [1] = ( vertices_heightmap[rows-1] [i]      [0], thickness, vertices_heightmap[rows-1] [i]      [2] )
+        surface.vectors[count+2] [2] =   vertices_heightmap[rows-1] [i+1]
+        surface.vectors[count+3] [0] = ( vertices_heightmap[rows-1] [i]      [0], thickness, vertices_heightmap[rows-1] [i]      [2] )
+        surface.vectors[count+3] [1] =   vertices_heightmap[rows-1] [i+1]
+        surface.vectors[count+3] [2] = ( vertices_heightmap[rows-1] [i+1]    [0], thickness, vertices_heightmap[rows-1] [i+1]    [2] )
+        count += 4
+    for i in range(rows-1): # Left/Right column frame 
+        surface.vectors[count]   [0] =   vertices_heightmap[i]      [0]
+        surface.vectors[count]   [1] = ( vertices_heightmap[i]      [0]      [0], thickness, vertices_heightmap[i]      [0]      [2] )
+        surface.vectors[count]   [2] =   vertices_heightmap[i+1]    [0]
+        surface.vectors[count+1] [0] = ( vertices_heightmap[i]      [0]      [0], thickness, vertices_heightmap[i]      [0]      [2] )
+        surface.vectors[count+1] [1] =   vertices_heightmap[i+1]    [0]
+        surface.vectors[count+1] [2] = ( vertices_heightmap[i+1]    [0]      [0], thickness, vertices_heightmap[i+1]    [0]      [2] )
+        surface.vectors[count+2] [0] =   vertices_heightmap[i]      [cols-1]
+        surface.vectors[count+2] [1] = ( vertices_heightmap[i]      [cols-1] [0], thickness, vertices_heightmap[i]      [cols-1] [2] )
+        surface.vectors[count+2] [2] =   vertices_heightmap[i+1]    [cols-1]
+        surface.vectors[count+3] [0] = ( vertices_heightmap[i]      [cols-1] [0], thickness, vertices_heightmap[i]      [cols-1] [2] )
+        surface.vectors[count+3] [1] =   vertices_heightmap[i+1]    [cols-1]
+        surface.vectors[count+3] [2] = ( vertices_heightmap[i+1]    [cols-1] [0], thickness, vertices_heightmap[i+1]    [cols-1] [2] )
+        count += 4
 
     # Saves the mesh to an STL file
     surface.save(f"{img_name.split('.')[0]}.stl")
