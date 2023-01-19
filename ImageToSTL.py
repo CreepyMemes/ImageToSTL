@@ -23,9 +23,9 @@ def getHeightMap(pixels, average):
     
 def main():
     # Image Loader
-    img_name   = 'input.png'                                                        # Image file name
+    img_name   = 'dwayne.png'                                                       # Image file name
     img        = Image.open(img_name).convert('L')                                  # Opens the image and converts it to grayscale                                                          
-    cols, rows = (10, 10)                                                           # Final image size in mm
+    cols, rows = (200, 200)                                                         # Final image size in mm
     img        = img.resize( (cols, int(cols * img.size[1] / img.size[0])) )        # Resizes the image with while maintaining the aspect ratio
     cols, rows = img.size                                                           # Actual image size in mm with original aspect ratio   
     pixels     = img.load()                                                         # Loads the image data into pixels
