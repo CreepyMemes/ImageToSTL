@@ -20,12 +20,32 @@ def getRowHeightMap(row, average):
 # Converts a whole image into a height map
 def getHeightMap(pixels, average):
     return getNormalized( [ getRowHeightMap(row, average) for row in pixels ] )
-    
+
+# Algorithm that stitches the back of the STL mesh to make it a 3D printable solid
+def getStitchingCoords(rows, cols):
+    coords = []
+    xa, za = (0, 0)
+    for i in range(cols + rows - 2):
+        if i < rows:
+            z = i
+        else: 
+            z = rows - 1
+            xa += 1      
+        if i+1 < cols:
+            x = i+1
+        else: 
+            x = cols - 1
+            za += 1      
+        coords.append((z, xa))
+        coords.append((za, x))
+    return coords
+
+# Main program
 def main():
     # Image Loader
     img_name   = 'dwayne.png'                                                       # Image file name
     img        = Image.open(img_name).convert('L')                                  # Opens the image and converts it to grayscale                                                          
-    cols, rows = (200, 200)                                                         # Final image size in mm
+    cols, rows = (100, 100)                                                         # Final image size in mm
     img        = img.resize( (cols, int(cols * img.size[1] / img.size[0])) )        # Resizes the image with while maintaining the aspect ratio
     cols, rows = img.size                                                           # Actual image size in mm with original aspect ratio   
     pixels     = img.load()                                                         # Loads the image data into pixels
@@ -44,12 +64,12 @@ def main():
             out_img.putpixel( (x, y), int(255 * pixel) )
     out_img.save( f"{img_name.split('.')[0]}_heightmap.png" )
     print("Height Map File Generated!")
-
+  
     # Mesh variables
-    thickness = cols / 30                                                # Solid mesh thickness
-    triangles = 2 * ( (cols-1) * (rows-1) + 2 * ( (cols-1) + (rows-1)) ) # Amount of triangles in the whole mesh
-    count = 0                                                            # Variable that counts each triangle
-    
+    thickness = cols / 30                                                                              # Solid mesh thickness
+    triangles = 2 * ( ((cols-1) * (rows-1) + 2 * ( (cols-1) + (rows-1))) + ((cols-1) + (rows-1) - 1) ) # Total amount of triangles in the whole mesh
+    count = 0                                                                                          # Variable that counts each triangle
+
     # Declares a 3D numpy array that will contain all the vertices of the height map mesh
     vertices_heightmap  = np.zeros( (rows, cols, 3) )
 
@@ -101,6 +121,16 @@ def main():
         surface.vectors[count+3] [1] =   vertices_heightmap[i+1]    [cols-1]
         surface.vectors[count+3] [2] = ( vertices_heightmap[i+1]    [cols-1] [0], thickness, vertices_heightmap[i+1]    [cols-1] [2] )
         count += 4
+
+    # Gets the coords to stitch the hole in the back
+    coords = getStitchingCoords(rows, cols)
+
+    # Stitches the hole in the back in order to make it a 3D printable solid
+    for i in range(1, len(coords)-1):
+        surface.vectors[count][0] = ( vertices_heightmap[coords[i-1] [0]] [coords[i-1] [1]] [0], thickness, vertices_heightmap[coords[i-1] [0]] [coords[i-1] [1]] [2] )
+        surface.vectors[count][1] = ( vertices_heightmap[coords[i]   [0]] [coords[i]   [1]] [0], thickness, vertices_heightmap[coords[i]   [0]] [coords[i]   [1]] [2] )
+        surface.vectors[count][2] = ( vertices_heightmap[coords[i+1] [0]] [coords[i+1] [1]] [0], thickness, vertices_heightmap[coords[i+1] [0]] [coords[i+1] [1]] [2] )
+        count += 1
 
     # Saves the mesh to an STL file
     surface.save(f"{img_name.split('.')[0]}.stl")
