@@ -45,13 +45,13 @@ def main():
 
     # Main input Constants 
     img_name      = 'dwayne.png'                                                       # Image file name
-    layer_height  = 0.2 * 2                                                            # Nozzle layer height to print the object with
+    layer_height  = 0.2                                                                # Nozzle layer height to print the object with
     width         = 50                                                                 # Object width  size in mm
 
     # Image Loader
     img           = Image.open(img_name).convert('L')                                  # Opens the image and converts it to grayscale        
     width, height = ( width, width * img.size[1] / img.size[0] )                       # Actual object size in mm with original aspect ratio
-    rows          = int( height/layer_height )                                         # Image resizing pixels per row
+    rows          = int( height/ (layer_height * 2) )                                  # Image resizing pixels per row
     cols          = int( rows * height / width )                                       # Image resizing pixels per column
     img           = img.resize( (cols, rows) )                                         # Resizes the image with the previous values
     pixels        = img.load()                                                         # Loads the image data into pixels
