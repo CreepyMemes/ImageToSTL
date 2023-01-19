@@ -46,12 +46,12 @@ def main():
     # Main input Constants 
     img_name      = 'dwayne.png'                                                       # Image file name
     layer_height  = 0.2                                                                # Nozzle layer height to print the object with
-    width         = 50                                                                 # Object width  size in mm
+    width         = 50                                                                 # Object width size in mm
 
     # Image Loader
     img           = Image.open(img_name).convert('L')                                  # Opens the image and converts it to grayscale        
     width, height = ( width, width * img.size[1] / img.size[0] )                       # Actual object size in mm with original aspect ratio
-    rows          = int( height/ (layer_height * 2) )                                  # Image resizing pixels per row
+    rows          = int( height / (layer_height * 2) )                                 # Image resizing pixels per row
     cols          = int( rows * height / width )                                       # Image resizing pixels per column
     img           = img.resize( (cols, rows) )                                         # Resizes the image with the previous values
     pixels        = img.load()                                                         # Loads the image data into pixels
@@ -62,15 +62,7 @@ def main():
 
     # Converts the image into a normalized height map
     height_map = getHeightMap(pixels, average)
-
-    # Saves the height map image into PNG file
-    out_img = Image.new( 'L', (cols, rows) )
-    for y, row in enumerate(height_map):
-        for x, pixel in enumerate(row):
-            out_img.putpixel( (x, y), int(255 * pixel) )
-    out_img.save( f"{img_name.split('.')[0]}_heightmap.png" )
-    print("Height Map File Generated!")
-    
+ 
     # Mesh variables
     thickness = width / 30                                                                             # Solid mesh thickness
     triangles = 2 * ( ((cols-1) * (rows-1) + 2 * ( (cols-1) + (rows-1))) + ((cols-1) + (rows-1) - 1) ) # Total amount of triangles in the whole mesh
@@ -140,7 +132,6 @@ def main():
 
     # Saves the mesh to an STL file
     surface.save(f"{img_name.split('.')[0]}.stl")
-    print("STL File Generated!")
 
 if __name__ == '__main__':
     main()
