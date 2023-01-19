@@ -5,9 +5,9 @@ ImageToSTL is a user-friendly program that allows users to easily convert their 
 
 The program works by first taking an image as input, then analyzing the image to create a height map. This height map is then used to generate an STL file that is ready to be 3D printed.
 
-One of the key features of ImageToSTL is its ability to create highly detailed and accurate STL files, which are perfect for creating lithophane-like models. The model it generates is an image that shows up when it's illuminated from the left. This makes ImageToSTL an ideal tool for creating beautiful and unique 3D printed gifts and keepsakes.
+The main function of this script is the creation of highly detailed and accurate lithophane-like models. The model it generates is an image that shows up when it's illuminated from the left. 
 
-Overall, ImageToSTL is an easy-to-use program that allows users to quickly and easily convert their favorite images into 3D printable STL files. Whether you're a professional 3D designer or a hobbyist, ImageToSTL is the perfect tool for creating beautiful and unique 3D printed objects.
+Overall ImageToSTL is an easy-to-use program that allows users to quickly and easily convert their favorite images into 3D printable STL files. Whether you're a professional 3D designer or a hobbyist, ImageToSTL is the perfect tool for creating beautiful and unique 3D printed objects.
 
 Note
 =====
