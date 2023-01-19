@@ -1,4 +1,4 @@
-Still a work in progress. Don't use this fork yet
+What is ImageToSTL?
 =====
 
 This is a simple python script that takes an image as input, then proceeds to directly output an STL file ready to 3D print.
