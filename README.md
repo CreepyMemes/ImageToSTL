@@ -7,15 +7,17 @@ The program works by first taking an image as input, the nozzle height you are g
 
 The main function of this script is the creation of highly detailed and accurate lithophane-like models. The model it generates is an image that shows up when it's illuminated from the left. 
 
-Note
-=====
-
-This project is still a work in progress, and I'm planning to add a GUI to make the program even more user-friendly.
-
 Usage
 =====
 
-`python ImageToSTL.py`
+![Usage](https://i.imgur.com/cxM0RFu.png)
 
-Put the script and the image you want to convert in the same folder. ImageToSTL will generates an STL file called `imagename.stl` in the same folder.
+Select the image you want to convert and the folder you want your STL to be generated in.
+
+![Usage](https://i.imgur.com/SeT4hjN.png)
+
+Insert the width and height values in mm (they will be automatically adjusted to maintain the original aspect ratio of your image)
+Then enter the Layer Height you are going to 3D Print with (0.2 mm is set default). 
+
+To confirm the entered values click Generate STL. ImageToSTL will generates an STL file called `imagename.stl` in the folder you've selected.
 When printing on FDM, the heightmap should be oriented vertically (the STL file should already be oriented correctly).
