@@ -10,9 +10,11 @@ The main function of this script is the creation of highly detailed and accurate
 Usage
 =====
 
+Download the executable Release from [here](https://github.com/CreepyMemes/ImageToSTL/releases/tag/v1.0)
+
 ![Usage](https://i.imgur.com/cxM0RFu.png)
 
-Select the image you want to convert and the folder you want your STL to be generated in.
+Click browse to select the image you want to convert and the folder you want your STL to be generated in.
 
 ![Usage](https://i.imgur.com/SeT4hjN.png)
 
