@@ -1,0 +1,4 @@
+numpy==1.24.1
+numpy-stl==3.0.0
+Pillow==9.4.0
+PySimpleGUI==4.60.4
