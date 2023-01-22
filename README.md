@@ -7,7 +7,7 @@ ImageToSTL is an easy-to-use single program that allows users to quickly and eas
 
 The program works by first taking an image as input, the nozzle height you are going to 3D print with and the model's size in mm, then it analyzes the image to create a height map with the information taken previously. This height map is then used to generate an STL file that is ready to be 3D printed.
 
-The main function of this script is the creation of highly detailed and accurate lithophane-like models. The model it generates is an image that shows up when it's illuminated from the left. 
+The main function of this script is the creation of highly detailed and accurate lithophane-like models. The model it generates is an image that shows up when it's illuminated from the left, and not back-lit like traditional lithophanes.
 
 Usage
 =====
