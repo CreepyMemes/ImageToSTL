@@ -12,7 +12,7 @@ The main function of this script is the creation of highly detailed and accurate
 Usage
 =====
 
-Download the executable Release from Releases or click [here](https://github.com/CreepyMemes/ImageToSTL/releases/tag/v1.0)
+Download the executable Release from Releases or click [here](https://github.com/CreepyMemes/ImageToSTL/releases/download/v1.0/ImageToSTL.exe)
 
 ![Usage](https://i.imgur.com/cxM0RFu.png)
 
