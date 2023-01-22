@@ -99,7 +99,7 @@ def main():
 
         if event == '-GENERATE-':
             width, height = ( float(values['-WIDTH-']),  float(values['-HEIGHT-']))
-            rows          = int( height / (float(values['-NOZZLE-']) * 2) )                    # Auto resizing image pixels per row
+            rows          = int( height / (float(values['-NOZZLE-'])) )                        # Auto resizing image pixels per row
             cols          = int( rows * height / width )                                       # Auto resizing image pixels per column
             img           = img.resize( (cols, rows) )                                         # Resizes the image with the previous values
             pixels        = img.load()                                                         # Loads the image data into pixels
