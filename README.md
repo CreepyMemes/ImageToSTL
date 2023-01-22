@@ -1,4 +1,4 @@
-![Downloads](https://img.shields.io/github/downloads/creepymemes/imagetostl/total?color=g)
+![Downloads](https://img.shields.io/github/downloads/creepymemes/imagetostl/total)
 ![Downloads](https://img.shields.io/github/v/release/creepymemes/imagetostl)
 ![Downloads](https://img.shields.io/github/license/creepymemes/imagetostl)
 ![Downloads](https://img.shields.io/github/last-commit/creepymemes/imagetostl?color=red)
