@@ -27,3 +27,4 @@ Note
 ======
 
 When printing on FDM, the heightmap should be oriented vertically (the STL file should already be oriented correctly).
+Also a Brim is reccommended
