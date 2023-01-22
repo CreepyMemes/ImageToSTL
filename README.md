@@ -21,9 +21,8 @@ Click browse to select the image you want to convert and the folder you want you
 ![Usage](https://i.imgur.com/SeT4hjN.png)
 
 Insert the width and height values in mm (they will be automatically adjusted to maintain the original aspect ratio of your image)
-Then enter the Layer Height you are going to 3D Print with (0.2 mm is set default). 
+Then enter the Layer Height you are going to 3D Print with (0.2 mm is set default). To confirm the entered values click Generate STL. 
 
-To confirm the entered values click Generate STL. 
 ImageToSTL will then generate an STL file called `imagename.stl` in the folder you've selected.
 
 Note
