@@ -22,4 +22,8 @@ Insert the width and height values in mm (they will be automatically adjusted to
 Then enter the Layer Height you are going to 3D Print with (0.2 mm is set default). 
 
 To confirm the entered values click Generate STL. ImageToSTL will generates an STL file called `imagename.stl` in the folder you've selected.
+
+Note
+======
+
 When printing on FDM, the heightmap should be oriented vertically (the STL file should already be oriented correctly).
