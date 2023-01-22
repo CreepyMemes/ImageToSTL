@@ -1,25 +1,11 @@
-import PySimpleGUI as sg
 import numpy as np
 from PIL import Image
 from stl import mesh
 from functions import *
-
-# Window black theme
-sg.ChangeLookAndFeel('black')
+from layout import *
 
 # Main program function
 def main(): 
-    # Main window layout
-    layout = [
-        [ sg.Text('Select an image:',          size = (20,  1)),                                      sg.In(size = (40, 1), key='-FILE-',   enable_events = True),                sg.FileBrowse() ],
-        [ sg.Text('Folder to save your STL:',  size = (20,  1), visible=False, key='-FOLDER_TEXT-'),  sg.In(size = (40, 1), key='-FOLDER-', enable_events = True, visible=False), sg.FolderBrowse(visible=False, key='-FOLDER_BROWSE-') ],
-        [ sg.Text() ],
-        [ sg.Text('Width:',         size = (15,  1), visible=False, key="-WIDTH_TEXT-"),   sg.In(size = (7,  1), key="-WIDTH-",  enable_events = True, visible=False),                     sg.Text('mm', visible=False, key="-WIDTH_MM-")  ],
-        [ sg.Text('Height:',        size = (15,  1), visible=False, key="-HEIGHT_TEXT-"),  sg.In(size = (7,  1), key='-HEIGHT-', enable_events = True, visible=False),                     sg.Text('mm', visible=False, key="-HEIGHT_MM-") ],
-        [ sg.Text('Nozzle height:', size = (15,  1), visible=False, key="-NOZZLE_TEXT-"),  sg.In(size = (7,  1), key='-NOZZLE-', enable_events = True, visible=False, default_text="0.2"), sg.Text('mm', visible=False, key="-NOZZLE_MM-") ],
-        [ sg.Text() ],
-        [ sg.Button('Generate STL!', visible=False, key="-GENERATE-"), sg.Text('STL File Generated!', visible=False, key="-GENERATED_TEXT-")]
-    ]
 
     # Create the window object
     window = sg.Window("ImageToSTL", layout, size=(700,300), finalize=True)
@@ -68,7 +54,9 @@ def main():
             window['-HEIGHT_MM-'  ].Update(visible = True)
             window['-NOZZLE_TEXT-'].Update(visible = True)
             window['-NOZZLE-'     ].Update(visible = True)
-            window['-NOZZLE_MM-'  ].Update(visible = True)  
+            window['-NOZZLE_MM-'  ].Update(visible = True)
+            # Hide generation confirmation if folder is changed
+            window['-GENERATED_TEXT-'].Update(visible = False)  
 
         # Check if input values are legal
         if not isnumber(values['-WIDTH-']):
