@@ -30,6 +30,11 @@ Then enter the Layer Height you are going to 3D Print with (0.2 mm is set defaul
 
 ImageToSTL will then generate an STL file called `imagename.stl` in the folder you've selected previously.
 
+### If you want to run the script instead, install requirements first with this command:
+```
+python -m pip install -r requirements.txt
+```
+
 Note
 ======
 
