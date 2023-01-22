@@ -33,6 +33,6 @@ ImageToSTL will then generate an STL file called `imagename.stl` in the folder y
 Note
 ======
 
-When printing on FDM, the heightmap should be oriented vertically (the STL file should already be oriented correctly).
-
-Using a brim is also recommended, and you can also print it with 0% infill.
+- When printing on FDM, the heightmap should be oriented vertically (the STL file should already be oriented correctly).
+- Using a brim is also recommended, and you can also print it with 0% infill.
+- Put Z seam alignment in sharpest corner, so it doesn't obstruct the
