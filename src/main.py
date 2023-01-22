@@ -4,9 +4,7 @@ from stl import mesh
 from functions import *
 from layout import *
 
-# Main program function
 def main(): 
-
     # Create the window object
     window = sg.Window("ImageToSTL", layout, size=(700,300), finalize=True)
 
