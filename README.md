@@ -1,4 +1,4 @@
-![Downloads]()
+![Downloads](https://img.shields.io/github/downloads/s1lentCommit/imagetostl/total?color=g)
 ![Downloads](https://img.shields.io/github/v/release/s1lentCommit/imagetostl)
 ![Downloads](https://img.shields.io/github/license/s1lentCommit/imagetostl)
 ![Downloads](https://img.shields.io/github/last-commit/s1lentCommit/imagetostl?color=red)
