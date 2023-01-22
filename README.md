@@ -19,11 +19,11 @@ Usage
 
 Download the .exe program from 'Releases' or just click [here](https://github.com/CreepyMemes/ImageToSTL/releases/download/v1.0/ImageToSTL.exe)
 
-![Usage](https://i.imgur.com/cxM0RFu.png)
+![Usage](https://i.imgur.com/IknMLaJ.png)
 
 Click browse to select the image you want to convert and the folder you want your STL to be generated in.
 
-![Usage](https://i.imgur.com/SeT4hjN.png)
+![Usage](https://i.imgur.com/p8fROoN.png)
 
 Insert the width and height values in mm (they will be automatically adjusted to maintain the original aspect ratio of your image)
 Then enter the Layer Height you are going to 3D Print with (0.2 mm is set default). To confirm the entered values click Generate STL. 
