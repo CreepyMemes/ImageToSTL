@@ -34,9 +34,9 @@ layout = [
     ],
 
     [ 
-        sg.Text('Layer Height:', size = (15, 1), key="-NOZZLE_TEXT-", visible=False,),  
-        sg.In(size = (7, 1), key='-NOZZLE-', enable_events = True, default_text="0.2", visible=False), 
-        sg.Text('mm', key="-NOZZLE_MM-", visible=False) 
+        sg.Text('Layer Height:', size = (15, 1), key="-LAYER_TEXT-", visible=False,),  
+        sg.In(size = (7, 1), key='-LAYER-', enable_events = True, default_text="0.2", visible=False), 
+        sg.Text('mm', key="-LAYER_MM-", visible=False) 
     ],
 
     [ 
