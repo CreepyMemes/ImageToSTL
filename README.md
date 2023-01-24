@@ -3,7 +3,7 @@
 ![Downloads](https://img.shields.io/github/license/s1lentCommit/imagetostl)
 ![Downloads](https://img.shields.io/github/last-commit/s1lentCommit/imagetostl?color=red)
 
-![Show](https://i.imgur.com/bgk3A0F.jpg)
+![Show](https://github.com/s1lentCommit/ImageToSTL/blob/main/media/Showcase.gif?raw=true)
 
 What is ImageToSTL?
 =====
