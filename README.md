@@ -3,7 +3,7 @@
 ![Downloads](https://img.shields.io/github/license/creepymemes/imagetostl)
 ![Downloads](https://img.shields.io/github/last-commit/creepymemes/imagetostl?color=red)
 
-![Show](https://i.imgur.com/bgk3A0F.jpg)
+![Show](https://github.com/CreepyMemes/ImageToSTL/blob/main/media/Showcase.gif?raw=true)
 
 What is ImageToSTL?
 =====
