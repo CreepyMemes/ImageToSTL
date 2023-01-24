@@ -6,7 +6,8 @@ def get_tot_triangles(cols, rows):
     return 2 * ( ((cols-1) * (rows-1) + 2 * ( (cols-1) + (rows-1))) + ((cols-1) + (rows-1) - 1) )
 
 # Defines the coordinates of each height map vertex
-def get_vertices(vertices, height_map, width, height, cols, rows):
+def get_vertices(height_map, width, height, cols, rows):
+    vertices = np.zeros( (rows, cols, 3) )
     for i, row in enumerate(height_map):
         for j, pixel in enumerate(row):
             vertices[i][j] = ( j * (width / (cols-1)) - width/2, pixel * width / -10, height - i * (height / (rows-1)) ) # (x, y, z)
@@ -86,10 +87,7 @@ def get_stitching_coords(rows, cols):
 
 # Stitches the hole in the back in order to make it a 3D printable solid
 def stitch_hole(surface, vertices, cols, rows, count, thickness):
-    # Gets the coordinates of the path that stitches the hole in the back
-    coords = get_stitching_coords(rows, cols)
-
-    # Stiches the mesh hole in the back
+    coords = get_stitching_coords(rows, cols) 
     for i in range(1, len(coords)-1):
         surface.vectors[count][0] = back_vertex(vertices[coords[i-1][0]][coords[i-1][1]], thickness) 
         surface.vectors[count][1] = back_vertex(vertices[coords[i]  [0]][coords[i]  [1]], thickness)
@@ -103,9 +101,8 @@ def get_mesh(cols, rows, width, height, height_map):
     triangles = get_tot_triangles(cols, rows) # Total amount of triangles in the whole mesh
     count = 0                                 # Variable that counts each triangle iteration
 
-    # Declares the array that will contain all the vertices of the height map mesh and defines thier positions based on the height map
-    vertices = np.zeros( (rows, cols, 3) )
-    vertices = get_vertices( vertices, height_map, width, height, cols, rows )
+    # Array that contains all the vertices of the height map mesh
+    vertices = get_vertices( height_map, width, height, cols, rows )
 
     # Creates the 3D mesh
     surface = mesh.Mesh( np.zeros(triangles, dtype=mesh.Mesh.dtype) )
