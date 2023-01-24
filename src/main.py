@@ -8,21 +8,21 @@ def main():
         # Read incoming events
         window.read()
 
-        # Event if window is closed
+        # Event if the window is closed
         if window.event == None:
             break
         
-        # Event if a new image is entered
+        # Event if a new image is selected
         if window.event == '-FILE-':
-            window.open_image()        # Opens the image and converts it to grayscale
-            window.show_folder_input() # Unhides folder inputs
-            window.hide_confirmation() # Hides generation confirmation
-            window.reset_inputs()      # Resets width and height
+            window.open_image()
+            window.show_folder_input()
+            window.reset_inputs() # Resets width and height
+            window.hide_confirmation()
 
-        # if the folder is changed
+        # Event if a new folder is selected
         if window.event == '-FOLDER-':       
-            window.show_text_input()   # Unhides text inputs 
-            window.hide_confirmation() # Hides generation confirmation
+            window.show_text_input()
+            window.hide_confirmation() 
  
         window.is_input_legal() # Checks if input values are legal
         window.maintain_ratio() # Adjusts width and height to maintain the original aspect ratio
@@ -35,9 +35,9 @@ def main():
 
         # Event if Generate STL button is pressed
         if window.event == '-GENERATE-':         
-            window.process_image()     # Processes the image to generate a height map    
-            window.process_mesh()      # Creates and processes a mesh to generate an STL model
-            window.show_confirmation() # Print a confirmation to generating the STL file
+            window.process_image() # Generates a height map
+            window.process_mesh()  # Generates the STL model
+            window.show_confirmation()
 
     window.close_window()
 
