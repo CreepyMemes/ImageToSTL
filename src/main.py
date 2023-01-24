@@ -1,12 +1,10 @@
 from gui.gui import Gui
 
 def main(): 
-    # Create the window object
-    window = Gui()
+    window = Gui() # Creates the window object
    
     while True:
-        # Read incoming events
-        window.read()
+        window.read() # Reads incoming events
 
         # Event if the window is closed
         if window.event == None:
@@ -24,7 +22,7 @@ def main():
             window.show_text_input()
             window.hide_confirmation() 
  
-        window.is_input_legal() # Checks if input values are legal
+        window.is_input_legal() # Ignores last input values if it's not legal
         window.maintain_ratio() # Adjusts width and height to maintain the original aspect ratio
 
         # If width, height, and layer height values are all entered, a button to generate the STL is shown
