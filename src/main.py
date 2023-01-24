@@ -24,6 +24,7 @@ def main():
  
         window.is_input_legal() # Ignores last input value if it's illegal
         window.maintain_ratio() # Adjusts width and height to maintain the original aspect ratio
+        window.hide_confirmation() 
 
         # If width, height, and layer height values are all entered, a button to generate the STL is shown
         if window.is_all_present():
