@@ -111,6 +111,7 @@ class Gui:
         if not fn.is_number(self.values['-LAYER-']):
             self.gui['-LAYER-' ].Update( self.values['-LAYER-'][:-1]  )
     
+    # Checks if all input values are prsent
     def is_all_present(self):
         return not fn.is_empty( self.values['-WIDTH-']) and not fn.is_empty(self.values['-HEIGHT-']) and not fn.is_empty(self.values['-LAYER-'] )
 
@@ -123,7 +124,7 @@ class Gui:
         # Converts all values to float from string and saves them for later mesh use
         self.width, self.height = ( float(self.values['-WIDTH-']),  float(self.values['-HEIGHT-']) )
 
-        # Auto scales the image based on the layer height value and saves the new values for laeter mesh use
+        # Auto scales the image based on the layer height value and saves the new values for later mesh use
         self.cols, self.rows = ip.auto_scale_img_values( self.width, self.height, float(self.values['-LAYER-']) )
         pixels = ip.resize_img( self.img, self.cols, self.rows )
 
