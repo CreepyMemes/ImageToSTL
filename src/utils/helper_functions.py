@@ -1,5 +1,5 @@
 # Check if a given string is a valid integer or float
-def isnumber(num):
+def is_number(num):
     # Check if the number is an integer with more than 3 digits
     if num.find('.') == -1 and len(num) > 3:
         return False
