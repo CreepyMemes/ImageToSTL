@@ -15,16 +15,14 @@ def main():
             window.open_image()
             window.show_folder_input()
             window.reset_inputs() # Resets width and height
-            window.hide_confirmation()
 
         # Event if a new folder is selected
         if window.event == '-FOLDER-':       
             window.show_text_input()
-            window.hide_confirmation() 
- 
-        window.is_input_legal() # Ignores last input value if it's illegal
-        window.maintain_ratio() # Adjusts width and height to maintain the original aspect ratio
-        window.hide_confirmation() 
+
+        window.is_input_legal()    # Ignores last input value if it's illegal
+        window.maintain_ratio()    # Adjusts width and height to maintain the original aspect ratio
+        window.hide_confirmation() # Hided confirmation text if any event is read
 
         # If width, height, and layer height values are all entered, a button to generate the STL is shown
         if window.is_all_present():
