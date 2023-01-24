@@ -99,11 +99,9 @@ def stitch_hole(surface, vertices, cols, rows, count, thickness):
 
 # Creates and completes the whole STL mesh
 def get_mesh(cols, rows, width, height, height_map):
-
-    # Solid mesh thickness, total amount of triangles in the whole mesh and a variable that counts each triangle iteration
-    thickness = width / 40
-    triangles = get_tot_triangles(cols, rows)
-    count = 0
+    thickness = width / 40                    # Solid mesh thickness, 
+    triangles = get_tot_triangles(cols, rows) # Total amount of triangles in the whole mesh
+    count = 0                                 # Variable that counts each triangle iteration
 
     # Declares the array that will contain all the vertices of the height map mesh and defines thier positions based on the height map
     vertices = np.zeros( (rows, cols, 3) )
