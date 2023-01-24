@@ -1,11 +1,11 @@
 from gui.gui import Gui
 
 def main(): 
-    window = Gui() # Creates the window object
-   
-    while True:
-        window.read() # Reads incoming events
+    window = Gui()
 
+    while True:
+        window.read_event()
+        
         # Event if the window is closed
         if window.event == None:
             break
