@@ -22,7 +22,7 @@ class Gui:
         self.last_click = None
 
     # Read incoming events
-    def read(self):
+    def read_event(self):
         self.event, self.values = self.gui.read()
 
     # Adjusts width and height to maintain the original aspect ratio
@@ -102,13 +102,13 @@ class Gui:
     def hide_confirmation(self):
         self.gui['-GENERATED_TEXT-'].Update(visible = False) 
     
-    # Check if input values are legal
+    # Check if input values are legal, if not ignore last input
     def is_input_legal(self):
-        if not fn.isnumber(self.values['-WIDTH-']):
+        if not fn.is_number(self.values['-WIDTH-']):
             self.gui['-WIDTH-' ].Update( self.values['-WIDTH-'][:-1]  )
-        if not fn.isnumber(self.values['-HEIGHT-']):
+        if not fn.is_number(self.values['-HEIGHT-']):
             self.gui['-HEIGHT-'].Update( self.values['-HEIGHT-'][:-1] )
-        if not fn.isnumber(self.values['-LAYER-']):
+        if not fn.is_number(self.values['-LAYER-']):
             self.gui['-LAYER-' ].Update( self.values['-LAYER-'][:-1]  )
     
     def is_all_present(self):
