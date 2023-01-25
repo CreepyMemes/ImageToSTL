@@ -1,8 +1,9 @@
-from PIL import Image
+from PIL import Image, ImageEnhance
 
-# Opens an image and converts to grayscale
+# Opens an image, converts to grayscale and increases contrast
 def open_image(file):
     img = Image.open(file).convert('L')
+    img = ImageEnhance.Contrast(img).enhance(3)
     return img
 
 # Calculate height value to maintain the original aspect ratio
@@ -40,7 +41,7 @@ def get_row_height_map(row, average):
     result = []
     total  = 0
     for pixel in row:
-        total += pixel - average
+        total += pixel - average * 1.5
         result.append(total)
     return [ pixel - total/2 for pixel in result ]
 
@@ -48,4 +49,3 @@ def get_row_height_map(row, average):
 def get_height_map(pixels, cols, rows):
     average = get_average(pixels, cols, rows)
     return normalize( [ get_row_height_map(row, average) for row in pixels ] )
-    
