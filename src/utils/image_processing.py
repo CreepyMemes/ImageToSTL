@@ -3,7 +3,7 @@ from PIL import Image, ImageEnhance
 # Opens an image, converts to grayscale and increases contrast
 def open_image(file):
     img = Image.open(file).convert('L')
-    img = ImageEnhance.Contrast(img).enhance(3)
+    img = ImageEnhance.Contrast(img).enhance(1.5)
     return img
 
 # Calculate height value to maintain the original aspect ratio
