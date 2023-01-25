@@ -17,12 +17,14 @@ def get_vertices(height_map, width, height, cols, rows):
 def tesselate_main(surface, vertices, cols, rows, count):
     for i in range(rows-1):
         for j in range(cols-1):
-            surface.vectors[count]  [0] = vertices[i]   [j]
-            surface.vectors[count]  [1] = vertices[i]   [j+1]
-            surface.vectors[count]  [2] = vertices[i+1] [j]
-            surface.vectors[count+1][0] = vertices[i+1] [j+1]
-            surface.vectors[count+1][1] = vertices[i]   [j+1]
-            surface.vectors[count+1][2] = vertices[i+1 ][j]
+            # Triangle 1
+            surface.vectors[count]  [0] = vertices[i]  [j]
+            surface.vectors[count]  [1] = vertices[i]  [j+1]
+            surface.vectors[count]  [2] = vertices[i+1][j]
+            # Triangle 2
+            surface.vectors[count+1][0] = vertices[i+1][j+1]
+            surface.vectors[count+1][1] = vertices[i]  [j+1]
+            surface.vectors[count+1][2] = vertices[i+1][j]
             count += 2
     return count
 
@@ -33,7 +35,7 @@ def back_vertex(vertex, thickness):
 # Tesselates the frame mesh by combining all the frame vertices through triangles
 def tesselate_frame(surface, vertices, cols, rows, count, thickness):
     for i in range(cols-1):
-         # Top row frame
+        # Top row frame
         surface.vectors[count]  [0] = vertices[0][i]
         surface.vectors[count]  [1] = back_vertex(vertices[0][i],   thickness)
         surface.vectors[count]  [2] = vertices[0][i+1]
