@@ -17,7 +17,7 @@ The main function of this script is the creation of highly detailed and accurate
 Usage
 =====
 
-Download the .exe program from 'Releases' or just click [here](https://github.com/CreepyMemes/ImageToSTL/releases/download/v1.5/ImageToSTL.exe)
+Download the **ImageToSTL.exe** in the latest release from **releases** or just click [here](https://github.com/CreepyMemes/ImageToSTL/releases/)
 
 ![Usage](media/Usage.png)
 
