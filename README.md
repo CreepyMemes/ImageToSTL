@@ -1,14 +1,14 @@
-![Downloads](https://img.shields.io/github/downloads/s1lentCommit/imagetostl/total)
-![Downloads](https://img.shields.io/github/v/release/s1lentCommit/imagetostl)
-![Downloads](https://img.shields.io/github/license/s1lentCommit/imagetostl)
-![Downloads](https://img.shields.io/github/last-commit/s1lentCommit/imagetostl?color=red)
+![Downloads](https://img.shields.io/github/downloads/s1lentcommit/stl-ready-image/total)
+![Downloads](https://img.shields.io/github/v/release/s1lentcommit/stl-ready-image)
+![Downloads](https://img.shields.io/github/license/s1lentcommit/stl-ready-image)
+![Downloads](https://img.shields.io/github/last-commit/s1lentcommit/stl-ready-image?color=red)
 
 ![Show](media/Showcase.gif)
 
-What is ImageToSTL?
+What is STL Ready Image?
 =====
 
-ImageToSTL is an easy-to-use single program that allows users to quickly and easily convert their favorite images into 3D printable STL files. Whether you're a professional 3D designer or a hobbyist, ImageToSTL is the perfect tool for creating beautiful and unique 3D printed objects.
+stl-ready-image is an easy-to-use single program that allows users to quickly and easily convert their favorite images into 3D printable STL files. Whether you're a professional 3D designer or a hobbyist, stl-ready-image is the perfect tool for creating beautiful and unique 3D printed objects.
 
 The program works by first taking an image as input, the layer height you are going to 3D print with and the model's size in mm, then it analyzes the image to create a height map with the information taken previously. This height map is then used to generate an STL file that is ready to be 3D printed.
 
@@ -17,7 +17,7 @@ The main function of this script is the creation of highly detailed and accurate
 Usage
 =====
 
-Download the **ImageToSTL.exe** in the latest release from **releases** or just click [here](https://github.com/s1lentCommit/ImageToSTL/releases/)
+Download the **stl-ready-image.exe** in the latest release from **releases** or just click [here](https://github.com/s1lentcommit/stl-ready-image/releases/)
 
 ![Usage](media/Usage.png)
 
@@ -28,7 +28,7 @@ Click browse to select the image you want to convert and the folder you want you
 Insert the width and height values in mm (they will be automatically adjusted to maintain the original aspect ratio of your image)
 Then enter the Layer Height you are going to 3D Print with (0.2 mm is set default). To confirm the entered values click Generate STL. 
 
-ImageToSTL will then generate an STL file called `imagename.stl` in the folder you've selected previously.
+stl-ready-image will then generate an STL file called `imagename.stl` in the folder you've selected previously.
 
 ### If you want to run the script instead, install requirements first with this command:
 ```
